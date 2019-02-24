@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="toolbar_height">256dp</dimen>
+    <dimen name="toolbar_bottom_margin">48dp</dimen>
+    <dimen name="view_pager_mergin_top">10dp</dimen>
+    <dimen name="layout_height">200dp</dimen>
+    <dimen name="padding">5dp</dimen>
+    <dimen name="activity_margin_content">24dp</dimen>
+    <dimen name="progress_bar_height">42dp</dimen>
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Giphy</string>
+    <string name="action_settings">Settings</string>
+    <string name="network_toast">Not connected to internet. Please check your network connection and then pull to refersh again.</string>
+    <string name="error_toast">Error : Something went wrong.</string>
+    <string name="search_hint">Search Gifs</string>
+    <string name="placeholder_text">No data available</string>
+</resources>
