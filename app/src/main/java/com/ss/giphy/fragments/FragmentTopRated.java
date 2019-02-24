@@ -139,7 +139,7 @@ public class FragmentTopRated extends Fragment implements MainActivity.DataListe
 		//movieArr.clear();
 		try {
 			GiphyApiClient giphyApiClient = ServiceGenerator.createService(GiphyApiClient.class);
-			Call<GiphyModel> call = giphyApiClient.getGifs(API_KEY, "26", "G", String.valueOf(offset), "json");
+			Call<GiphyModel> call = giphyApiClient.getGifs(API_KEY, String.valueOf(itemPerPage), "G", String.valueOf(offset), "json");
 			call.enqueue(new Callback<GiphyModel>() {
 				@Override
 				public void onResponse(Call<GiphyModel> call, retrofit2.Response<GiphyModel> response) {
