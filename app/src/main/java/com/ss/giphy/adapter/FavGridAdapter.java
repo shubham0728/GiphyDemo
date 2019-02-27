@@ -12,6 +12,7 @@ import com.like.OnAnimationEndListener;
 import com.like.OnLikeListener;
 import com.ss.giphy.R;
 import com.ss.giphy.model.GiphyEntity;
+import com.ss.giphy.repository.GiphyViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class FavGridAdapter extends BaseAdapter implements OnLikeListener, OnAni
 	private List<GiphyEntity> arr = new ArrayList<>();
 	private GifImageView mGif;
 	private LikeButton mFav;
+	private GiphyViewModel giphyViewModel;
 
 	/**
 	 * Constructor
@@ -36,10 +38,11 @@ public class FavGridAdapter extends BaseAdapter implements OnLikeListener, OnAni
 	 * @param ctx
 	 * @param arr
 	 */
-	public FavGridAdapter(Activity ctx, List<GiphyEntity> arr) {
+	public FavGridAdapter(Activity ctx, List<GiphyEntity> arr, GiphyViewModel viewModel) {
 		_ctx = ctx;
 		this.arr = arr;
 		this.inflter = (LayoutInflater.from(ctx));
+		this.giphyViewModel = viewModel;
 	}
 
 	@Override
@@ -61,10 +64,11 @@ public class FavGridAdapter extends BaseAdapter implements OnLikeListener, OnAni
 	public View getView(int i, View view, ViewGroup viewGroup) {
 		view = inflter.inflate(R.layout.grid_adapter, null);
 
-		final GiphyEntity entity = arr.get(i);
+		GiphyEntity entity = arr.get(i);
 
 		mGif = view.findViewById(R.id.img_movie);
 		mFav = view.findViewById(R.id.img_fav);
+		mFav.setId(entity.getButtonId());
 		mFav.setOnLikeListener(this);
 		Glide.with(_ctx).load(entity.getUrl()).into(mGif);
 		if (entity.isFav())
@@ -83,11 +87,19 @@ public class FavGridAdapter extends BaseAdapter implements OnLikeListener, OnAni
 
 	@Override
 	public void liked(LikeButton likeButton) {
-		// Handle Like button clicks here.
+		int id = likeButton.getId();
+		GiphyEntity giphyEntity = giphyViewModel.loadGiphy(id);
+		giphyEntity.setFav(true);
+		giphyViewModel.updateGiphy(giphyEntity);
+		likeButton.setLiked(true);
 	}
 
 	@Override
 	public void unLiked(LikeButton likeButton) {
-		// Handle Like button clicks here.
+		int id = likeButton.getId();
+		GiphyEntity giphyEntity = giphyViewModel.loadGiphy(id);
+		giphyEntity.setFav(false);
+		giphyViewModel.updateGiphy(giphyEntity);
+		likeButton.setLiked(false);
 	}
 }

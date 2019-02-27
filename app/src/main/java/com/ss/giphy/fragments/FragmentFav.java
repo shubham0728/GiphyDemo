@@ -61,7 +61,7 @@ public class FragmentFav extends Fragment {
 		giphyModel.getLiveFavGiphy().observe(this, new Observer<List<GiphyEntity>>() {
 			@Override
 			public void onChanged(@Nullable List<GiphyEntity> giphyEntities) {
-				adapter = new FavGridAdapter(getActivity(), giphyEntities);
+				adapter = new FavGridAdapter(getActivity(), giphyEntities, giphyModel);
 				grid.setAdapter(adapter);
 			}
 		});
@@ -73,7 +73,7 @@ public class FragmentFav extends Fragment {
 				giphyModel.getLiveFavGiphy().observe(getActivity(), new Observer<List<GiphyEntity>>() {
 					@Override
 					public void onChanged(@Nullable List<GiphyEntity> giphyEntities) {
-						adapter = new FavGridAdapter(getActivity(), giphyEntities);
+						adapter = new FavGridAdapter(getActivity(), giphyEntities, giphyModel);
 						grid.setAdapter(adapter);
 						pullToRefresh.setRefreshing(false);
 					}
