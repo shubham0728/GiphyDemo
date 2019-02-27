@@ -9,11 +9,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.GridLayoutAnimationController;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,14 +34,11 @@ import com.giphy.sdk.core.network.api.GPHApi;
 import com.giphy.sdk.core.network.api.GPHApiClient;
 import com.giphy.sdk.core.network.response.ListMediaResponse;
 import com.google.gson.JsonObject;
-import com.like.LikeButton;
-import com.like.OnAnimationEndListener;
-import com.like.OnLikeListener;
 import com.rey.material.widget.ProgressView;
 import com.ss.giphy.R;
-import com.ss.giphy.Util.Consts;
-import com.ss.giphy.Util.EndlessScrollListener;
-import com.ss.giphy.Util.GiphySharedPreferences;
+import com.ss.giphy.util.Consts;
+import com.ss.giphy.util.EndlessScrollListener;
+import com.ss.giphy.util.GiphySharedPreferences;
 import com.ss.giphy.network.ServiceGenerator;
 import com.ss.giphy.adapter.TopRatedGridAdapter;
 import com.ss.giphy.api.GiphyApiClient;
@@ -115,6 +113,11 @@ public class FragmentTopRated extends Fragment implements MainActivity.DataListe
 		placeholerText = view.findViewById(R.id.placeholerText);
 		progress.start();
 		checkConnection();
+
+		//Adding animation to Grid view.
+		Animation animation = AnimationUtils.loadAnimation(getContext(),R.anim.gridanim);
+		GridLayoutAnimationController controller = new GridLayoutAnimationController(animation, .2f, .2f);
+		grid.setLayoutAnimation(controller);
 
 		grid.setOnScrollListener(new EndlessScrollListener() {
 			@Override

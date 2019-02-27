@@ -1,4 +1,4 @@
-package com.ss.giphy.Util;
+package com.ss.giphy.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
